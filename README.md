@@ -52,13 +52,13 @@ A plug-and-play GraphQL subscription implementation for Graphene + Django built 
     ```python
     # your_project/routing.py
     from channels.routing import ProtocolTypeRouter, URLRouter
-    from django.urls import path 
+    from django.urls import path
 
     from graphene_subscriptions.consumers import GraphqlSubscriptionConsumer
 
     application = ProtocolTypeRouter({
         "websocket": URLRouter([
-            path('graphql/', GraphqlSubscriptionConsumer)
+            path('graphql/', GraphqlSubscriptionConsumer.as_asgi())
         ]),
     })
     ```
@@ -170,7 +170,7 @@ You can also filter events based on a subscription's arguments. For example, her
 ```python
 import graphene
 from graphene_django.types import DjangoObjectType
-from graphene_subscriptions.events import UPDATED 
+from graphene_subscriptions.events import UPDATED
 
 from your_app.models import YourModel
 
@@ -199,7 +199,7 @@ Defining a subscription that is fired whenever a given model instance is deleted
 ```python
 import graphene
 from graphene_django.types import DjangoObjectType
-from graphene_subscriptions.events import DELETED 
+from graphene_subscriptions.events import DELETED
 
 from your_app.models import YourModel
 

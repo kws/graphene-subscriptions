@@ -35,6 +35,7 @@ class AttrDict:
 
 
 class GraphqlSubscriptionConsumer(SyncConsumer):
+
     def websocket_connect(self, message):
         async_to_sync(self.channel_layer.group_add)("subscriptions", self.channel_name)
 
